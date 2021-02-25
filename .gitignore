@@ -1,0 +1,5 @@
+#Ignore files in the Image Folder
+Images/*
+
+#Except for the placeholder text file
+!Images/Insert_Images_Here.txt
