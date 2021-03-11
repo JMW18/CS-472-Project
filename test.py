@@ -12,7 +12,7 @@ cap.set(4, 480)
 
 #Show the screens until closed
 while(True):
-    #Reads each frame
+    #ret gets the return value and frame reads each frame
     ret, frame = cap.read()
     #Get the faces in the frame
     faces = faceCascade.detectMultiScale(
