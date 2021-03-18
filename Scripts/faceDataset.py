@@ -46,6 +46,9 @@ while(True):
     elif count >= 1:
         break 
 
+#Let user know the picture(s) have been taken
+print('Pictures have been taken')
+
 #Release the capture
 videoCapture.release()
 #Destroy all the windows created
