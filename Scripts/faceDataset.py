@@ -32,7 +32,7 @@ while(True):
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
         count +=1
         #Save the image of the face to the 'Images' folder
-        cv2.imwrite("../Images/User." + str(faceID) + '.' + str(count) + '.jpg')
+        cv2.imwrite("../Images/User." + str(faceID) + '.' + str(count) + '.jpg', img)
         #Set the title of the window opened with the frame
         cv2.imshow('image', frame)
     
