@@ -4,16 +4,16 @@ import cv2
 #Get the cascade
 faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
 #Get the Video from the Camera
-cap = cv2.VideoCapture(0)
+videoCapture = cv2.VideoCapture(0)
 #Set the width of the window
-cap.set(3, 640)
+videoCapture.set(3, 640)
 #Set the height of the window
-cap.set(4, 480)
+videoCapture.set(4, 480)
 
 #Show the screens until closed
 while(True):
     #Reads each frame
-    ret, frame = cap.read()
+    ret, frame = videoCapture.read()
     #Get the faces in the frame
     faces = faceCascade.detectMultiScale(
         frame,
@@ -27,6 +27,8 @@ while(True):
         roi_color = frame[y:y+h, x:x+w]
     #Set the title of the Window opened with the frame
     cv2.imshow('CS-472 Project', frame)
+
+    #Is this even needed?
     #Gets input from keyboard? and '& 0xff' is added for 64-bit machines
     k = cv2.waitKey(30) & 0xff
     #Destroys window when ESC key is hit
