@@ -2,7 +2,7 @@ import os
 import cv2
 
 #Get the cascade
-faceCascade = cv2.CascadeClassifier('Cascades/haarcascade_frontalface_default.xml')
+faceCascade = cv2.CascadeClassifier('../Cascades/haarcascade_frontalface_default.xml')
 #Get the Video from the Camera
 videoCapture = cv2.VideoCapture(0)
 #Set the width of the window
@@ -32,7 +32,7 @@ while(True):
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
         count +=1
         #Save the image of the face to the 'Images' folder
-        cv2.imwrite("Images/User." + str(faceID) + '.' + str(count) + '.jpg')
+        cv2.imwrite("../Images/User." + str(faceID) + '.' + str(count) + '.jpg')
         #Set the title of the window opened with the frame
         cv2.imshow('image', frame)
     
