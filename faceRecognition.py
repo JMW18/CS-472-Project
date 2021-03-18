@@ -36,6 +36,6 @@ while(True):
         break
 
 #Release the capture
-cap.release()
+videoCapture.release()
 #Destroy all the windows created
 cv2.destroyAllWindows()
