@@ -47,7 +47,7 @@ while(True):
             confidence = " {0}%".format(round(100 - confidence))
         else:
             id = names[0]
-            confidence = " {0}%".format(round(100 - confidence))
+            confidence = "0%"
 
         cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
         cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
