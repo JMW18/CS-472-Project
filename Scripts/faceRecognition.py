@@ -38,7 +38,7 @@ while(True):
         gray,
         scaleFactor=1.2,
         minNeighbors=5,
-        minSize=(int(minW), int(minH))s
+        minSize=(int(minW), int(minH))
     )
     #Mark the faces using a blue rectangle
     for (x,y,w,h) in faces:
