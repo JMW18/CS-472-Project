@@ -47,12 +47,12 @@ while(True):
 
         confidence = "   {0}%".format(round(confidence))
 
-        cv2.putText(img, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
-        cv2.putText(img, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
+        cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
+        cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
         
         roi_color = frame[y:y+h, x:x+w]
     #Set the title of the Window opened with the frame
-    cv2.imshow('CS-472 Project', gray)
+    cv2.imshow('CS-472 Project', frame)
 
     #Is this even needed?
     #Gets input from keyboard? and '& 0xff' is added for 64-bit machines
