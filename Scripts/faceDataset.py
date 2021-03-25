@@ -43,7 +43,7 @@ while(True):
     if k == 27:
         break
     #Take one sample photo
-    elif count >= 1:
+    elif count >= 30:
         break 
 
 #Let user know the picture(s) have been taken
