@@ -32,17 +32,18 @@ minH = 0.1 * videoCapture.get(4)
 while(True):
     #Reads each frame
     ret, frame = videoCapture.read()
+    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     #Get the faces in the frame
     faces = faceCascade.detectMultiScale(
-        frame,
+        gray,
         scaleFactor=1.2,
         minNeighbors=5,
         minSize=(20, 20)
     )
     #Mark the faces using a blue rectangle
     for (x,y,w,h) in faces:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
-        id, confidence = recognizer.predict(frame[y:y+h,x:x+w])
+        cv2.rectangle(gray, (x,y), (x+w, y+h), (255,0,0), 2)
+        id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
         confidence = "   {0}%".format(round(confidence))
 
@@ -51,7 +52,7 @@ while(True):
         
         roi_color = frame[y:y+h, x:x+w]
     #Set the title of the Window opened with the frame
-    cv2.imshow('CS-472 Project', frame)
+    cv2.imshow('CS-472 Project', gray)
 
     #Is this even needed?
     #Gets input from keyboard? and '& 0xff' is added for 64-bit machines

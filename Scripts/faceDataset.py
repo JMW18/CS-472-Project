@@ -20,21 +20,22 @@ count = 0
 while(True):
     #Reads each frame
     ret, frame = videoCapture.read()
+    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     #Get the faces in the frame
     faces = faceCascade.detectMultiScale(
-        frame,
+        gray,
         scaleFactor=1.2,
         minNeighbors=5,
         minSize=(20, 20)
     )
     #Mark the faces using a blue rectangle
     for (x,y,w,h) in faces:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
+        cv2.rectangle(gray, (x,y), (x+w, y+h), (255,0,0), 2)
         count +=1
         #Save the image of the face to the 'Images' folder
-        cv2.imwrite("../Images/User." + str(faceID) + '.' + str(count) + '.jpg', frame[y:y+h,x:x+w])
+        cv2.imwrite("../Images/User." + str(faceID) + '.' + str(count) + '.jpg', gray[y:y+h,x:x+w])
         #Set the title of the window opened with the frame
-        cv2.imshow('image', frame)
+        cv2.imshow('image', gray)
     
     #Is this even needed?
     #Gets input from keyboard? and '& 0xff' is added for 64-bit machines

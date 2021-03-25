@@ -16,7 +16,7 @@ detector = cv2.CascadeClassifier("../Cascades/haarcascade_frontalface_default.xm
 #Get the images saved in the 'Images' folder
 def getImagesAndLabels(path):
     #Get the paths for all images in the 'Images' folder
-    imagesPaths = [os.path.join(path,f) for f in os.listdir(path)]
+    imagePaths = [os.path.join(path,f) for f in os.listdir(path)]
     faceSamples = []
     ids = []
     #For every image in 'Images' folder
@@ -24,7 +24,7 @@ def getImagesAndLabels(path):
         #Convert image to black and white????
         PIL_img = Image.open(imagePath).convert('L')
         #??????????
-        img_numpy = np.array(PIL_img, 'unit8')
+        img_numpy = np.array(PIL_img, 'uint8')
         #Get the id from the saved name of the image
         id = int(os.path.split(imagePath)[-1].split(".")[1])
         #Returns the faces in the 'Images' folder as a list of rectanges
@@ -48,4 +48,4 @@ recognizer.train(faces, np.array(ids))
 recognizer.write('../Trainer/trainer.yml')
 
 #Print exiting information to the user
-print("\ [INFO] {0} faces trained. Exiting Program").format(len(np.unique(ids)))
+print("\ [INFO] {0} faces trained. Exiting Program".format(len(np.unique(ids))))
