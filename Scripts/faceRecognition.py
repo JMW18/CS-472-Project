@@ -15,7 +15,8 @@ font = cv2.FONT_HERSHEY_PLAIN
 id = 0
 Logan = 'Sexy Beast'
 Jalen = 'Jalen'
-names = ['Unknown', Logan, Jalen]
+Caleb = 'Caleb'
+names = ['Unknown', Logan, Jalen, Caleb]
 
 #Get the Video from the Camera
 videoCapture = cv2.VideoCapture(0)

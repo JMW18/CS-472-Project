@@ -24,7 +24,7 @@ def getImagesAndLabels(path):
         #Convert image to black and white????
         PIL_img = Image.open(imagePath).convert('L')
         #??????????
-        img_numpy = np.array(PIL_img), 'unit8')
+        img_numpy = np.array(PIL_img, 'unit8')
         #Get the id from the saved name of the image
         id = int(os.path.split(imagePath)[-1].split(".")[1])
         #Returns the faces in the 'Images' folder as a list of rectanges
