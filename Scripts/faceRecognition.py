@@ -32,7 +32,7 @@ minH = 0.1 * videoCapture.get(4)
 while(True):
     #Reads each frame
     ret, frame = videoCapture.read()
-    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     #Get the faces in the frame
     faces = faceCascade.detectMultiScale(
         gray,
