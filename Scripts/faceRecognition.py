@@ -38,16 +38,16 @@ while(True):
         gray,
         scaleFactor=1.2,
         minNeighbors=5,
-        minSize=(20, 20)
+        minSize=(int(minW), int(minH))s
     )
     #Mark the faces using a blue rectangle
     for (x,y,w,h) in faces:
-        cv2.rectangle(gray, (x,y), (x+w, y+h), (255,0,0), 2)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
         id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
         confidence = "   {0}%".format(round(confidence))
 
-        cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
+        cv2.putText(frame, str(names[id]), (x+5, y-5), font, 1, (255, 255, 255), 2)
         cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
         
         roi_color = frame[y:y+h, x:x+w]
