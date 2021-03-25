@@ -13,10 +13,7 @@ faceCascade = cv2.CascadeClassifier('../Cascades/haarcascade_frontalface_default
 font = cv2.FONT_HERSHEY_PLAIN
 
 id = 0
-Logan = 'Sexy Beast'
-Jalen = 'Jalen'
-Caleb = 'Caleb'
-names = ['Unknown', Logan, Jalen, Caleb]
+names = ['Unknown', 'Logan', 'Jalen']
 
 #Get the Video from the Camera
 videoCapture = cv2.VideoCapture(0)
@@ -45,9 +42,14 @@ while(True):
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
         id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
-        confidence = "   {0}%".format(round(confidence))
+        if(confidence < 100):
+            id = names[id]
+            confidence = " {0}%".format(round(confidence - 100))
+        else:
+            id = names[0]
+            confidence = " {0}%".format(round(confidence - 100))
 
-        cv2.putText(frame, str(names[id]), (x+5, y-5), font, 1, (255, 255, 255), 2)
+        cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
         cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
         
         roi_color = frame[y:y+h, x:x+w]
