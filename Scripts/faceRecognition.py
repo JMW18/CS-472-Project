@@ -26,6 +26,7 @@ videoCapture.set(4, 480)
 minW = 0.1 * videoCapture.get(3)
 minH = 0.1 * videoCapture.get(4)
 
+id = "Unknown"
 #Show the screens until closed
 while(True):
     #Reads each frame
@@ -47,19 +48,15 @@ while(True):
     )
     
     #Mark the faces using a rectangle
-    faceRecognized = False
-    if(not faceRecognized):
+    if(id = "Unknown"):
         for (x,y,w,h) in faces:
-            faceRecognized = False
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
             id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
             if(confidence < 100):
                 id = names[id]
                 confidence = " {0}%".format(round(100 - confidence))
-                faceRecognized = True
             else:
-                id = "Unknown"
                 confidence = " {0}%".format(round(100 - confidence))
                 faceRecognized = True
 
@@ -69,21 +66,17 @@ while(True):
             roi_color = frame[y:y+h, x:x+w]
 
     #
-    id = 0
-    if(not faceRecognized):
+    if(id = "Unknown"):
         for (x,y,w,h) in faces1:
-            faceRecognized = False
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
             id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
             if(confidence < 100):
                 id = names[id]
                 confidence = " {0}%".format(round(100 - confidence))
-                faceRecognized = True
             else:
                 id = "Unknown"
                 confidence = " {0}%".format(round(100 - confidence))
-                faceRecognized = True
 
             cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
             cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
