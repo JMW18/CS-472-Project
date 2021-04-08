@@ -47,38 +47,47 @@ while(True):
     )
     
     #Mark the faces using a rectangle
-    for (x,y,w,h) in faces:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
-        id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
+    faceRecognized = false
+    if(not faceRecognized)
+        for (x,y,w,h) in faces:
+            faceRecognized = false
+            cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
+            id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
-        if(confidence < 100):
-            id = names[id]
-            confidence = " {0}%".format(round(100 - confidence))
-        else:
-            id = "Unknown"
-            confidence = " {0}%".format(round(100 - confidence))
+            if(confidence < 100):
+                id = names[id]
+                confidence = " {0}%".format(round(100 - confidence))
+                faceRecognized = true
+            else:
+                id = "Unknown"
+                confidence = " {0}%".format(round(100 - confidence))
+                faceRecognized = true
 
-        cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
-        cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
-        
-        roi_color = frame[y:y+h, x:x+w]
+            cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
+            cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
+            
+            roi_color = frame[y:y+h, x:x+w]
 
     #
-    for (x,y,w,h) in faces1:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
-        id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
+    if(not faceRecognized)
+        for (x,y,w,h) in faces1:
+            faceRecognized = false
+            cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
+            id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
-        if(confidence < 100):
-            id = names[id]
-            confidence = " {0}%".format(round(100 - confidence))
-        else:
-            id = "Unknown"
-            confidence = " {0}%".format(round(100 - confidence))
+            if(confidence < 100):
+                id = names[id]
+                confidence = " {0}%".format(round(100 - confidence))
+                faceRecognized = true
+            else:
+                id = "Unknown"
+                confidence = " {0}%".format(round(100 - confidence))
+                faceRecognized = true
 
-        cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
-        cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
-        
-        roi_color = frame[y:y+h, x:x+w]
+            cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
+            cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
+            
+            roi_color = frame[y:y+h, x:x+w]
             
     #Set the title of the Window opened with the frame
     cv2.imshow('CS-472 Project', frame)
