@@ -48,7 +48,7 @@ while(True):
     )
     
     #Mark the faces using a rectangle
-    if(id = "Unknown"):
+    if(id == "Unknown"):
         for (x,y,w,h) in faces:
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
             id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
@@ -66,7 +66,7 @@ while(True):
             roi_color = frame[y:y+h, x:x+w]
 
     #
-    if(id = "Unknown"):
+    if(id == "Unknown"):
         for (x,y,w,h) in faces1:
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
             id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
