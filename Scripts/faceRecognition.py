@@ -48,7 +48,7 @@ while(True):
     
     #Mark the faces using a rectangle
     faceRecognized = false
-    if(not faceRecognized)
+    if(not faceRecognized):
         for (x,y,w,h) in faces:
             faceRecognized = false
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
@@ -69,7 +69,7 @@ while(True):
             roi_color = frame[y:y+h, x:x+w]
 
     #
-    if(not faceRecognized)
+    if(not faceRecognized):
         for (x,y,w,h) in faces1:
             faceRecognized = false
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
