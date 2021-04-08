@@ -7,7 +7,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('../Trainer/trainer.yml')
 
 #Get the cascade
-faceCascade = cv2.CascadeClassifier('../Cascades/haarcascade_frontalface_default.xml')
+faceCascade = cv2.CascadeClassifier('../Cascades/customHaarCascade.xml')
 
 #Assign the font when printing the user id to the screen
 font = cv2.FONT_HERSHEY_PLAIN
