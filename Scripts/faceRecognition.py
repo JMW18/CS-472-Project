@@ -69,6 +69,7 @@ while(True):
             roi_color = frame[y:y+h, x:x+w]
 
     #
+    id = 0
     if(not faceRecognized):
         for (x,y,w,h) in faces1:
             faceRecognized = False
