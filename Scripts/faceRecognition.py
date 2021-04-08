@@ -39,15 +39,15 @@ while(True):
     )
     #Mark the faces using a blue rectangle
     for (x,y,w,h) in faces:
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
         id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
 
         if(confidence < 100):
             id = names[id]
             confidence = " {0}%".format(round(100 - confidence))
         else:
-            id = names[0]
-            confidence = "0%"
+            id = "Unknown"
+            confidence = " {0}%".format(round(100 - confidence))
 
         cv2.putText(frame, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
         cv2.putText(frame, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)

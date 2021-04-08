@@ -24,18 +24,17 @@ while(True):
     #Get the faces in the frame
     faces = faceCascade.detectMultiScale(
         gray,
-        scaleFactor=1.2,
+        scaleFactor=1.3,
         minNeighbors=5,
-        minSize=(20, 20)
     )
     #Mark the faces using a blue rectangle
     for (x,y,w,h) in faces:
-        cv2.rectangle(gray, (x,y), (x+w, y+h), (255,0,0), 2)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
         count +=1
         #Save the image of the face to the 'Images' folder
         cv2.imwrite("../Images/User." + str(faceID) + '.' + str(count) + '.jpg', gray[y:y+h,x:x+w])
         #Set the title of the window opened with the frame
-        cv2.imshow('image', gray)
+        cv2.imshow('image', frame)
     
     #Is this even needed?
     #Gets input from keyboard? and '& 0xff' is added for 64-bit machines
