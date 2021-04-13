@@ -2,7 +2,13 @@
 Images/*
 
 #Except for the placeholder text file
-!Images/Insert_Images_Here.txt\
+!Images/Insert_Images_Here.txt
+
+#Ignore files in the Users Folder
+Users/*
+
+#Except for the placeholder text file
+!Users/User_JSON_Here.txt
 
 #Ignore the .vscode folder
 .vscode/
