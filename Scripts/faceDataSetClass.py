@@ -57,9 +57,9 @@ class FaceDataset:
             
             # Take the pictures
             if (len(faces) > 0):
-                self.getImages(faces, frame)
+                self.getImages(faces, frame, gray)
             else:
-                self.getImages(mask_faces, frame)
+                self.getImages(mask_faces, frame, gray)
             
             # Set the title of the window opened with the frame
             cv2.imshow('Collecting Data', frame)
@@ -98,7 +98,7 @@ class FaceDataset:
         
 
 
-    def getImages(self, faces, frame):
+    def getImages(self, faces, frame, gray):
         for (x, y, w, h) in faces:
                 
                 # Mark the identified face with a blue rectangle
