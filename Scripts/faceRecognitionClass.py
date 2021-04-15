@@ -16,7 +16,8 @@ class FaceRecognizer:
         
         # Get the cascade
         self.faceCascade = cv2.CascadeClassifier('../Cascades/haarcascade_frontalface_default.xml')
-        self.faceCascade1 = cv2.CascadeClassifier('../Cascades/haarcascade_profileface.xml')
+        self.profileCascade = cv2.CascadeClassifier('../Cascades/haarcascade_profileface.xml')
+        self.maskCascade = cv2.CascadeClassifier('../Cascades/mask_cascade.xml')
         
         # Assign the font when printing the user id to the screen
         self.font = cv2.FONT_HERSHEY_PLAIN
@@ -51,7 +52,14 @@ class FaceRecognizer:
             )
 
             # Get the side faces in the frame
-            side_faces = self.faceCascade1.detectMultiScale(
+            side_faces = self.profileCascade.detectMultiScale(
+                gray,
+                scaleFactor=1.2,
+                minNeighbors=5,
+                minSize=(int(minW), int(minH))
+            )
+
+            mask_faces = self.maskCascade.detectMultiScale(
                 gray,
                 scaleFactor=1.2,
                 minNeighbors=5,
@@ -66,7 +74,10 @@ class FaceRecognizer:
             
             # Determine the identification of the individual
             # based on the faces identified 
-            if(len(front_faces) > 0 and len(side_faces) == 0):
+            if (len(mask_faces) > 0):
+                print("Mask detected")
+                self.determineIndividual(frame, mask_faces, data)
+            elif(len(front_faces) > 0 and len(side_faces) == 0):
                 print("Front face recognized")
                 self.determineIndividual(frame, front_faces, data)
             elif (len(front_faces) == 0 and len(side_faces) > 0):
@@ -75,6 +86,7 @@ class FaceRecognizer:
             elif (len(front_faces) > 0 and len(side_faces) > 0):
                 print("Both front and side faces recognized")
                 self.determineIndividual(frame, front_faces, data)
+            elif ()
             else:
                 print("No faces recognized")
             
@@ -125,15 +137,16 @@ class FaceRecognizer:
                     
             roi_color = frame[y:y+h, x:x+w]
 
+    # Method used to write to a .csv file that includes the timestamps
+    # the recognizer is ran and the individual's name who is recognized
     def writeResults(self):
         if not os.path.isfile("../Results/results.csv"):
             # Creates the file
-            #file = open('../Results/results.csv', '+a')
             with open('../Results/results.csv', mode='w') as createFile:
                 create = csv.writer(createFile, delimiter=",", quotechar='"')
                 create.writerow(['Time', 'Name'])
         
-        #if os.path.isfile("../Results/results.csv") and os.access("../Results/results.csv", os.R_OK):
+        # Appends to the .csv file with timestamps and the individual recognized
         with open('../Results/results.csv', mode='a') as resultsFile:
             resultsWriter = csv.writer(resultsFile, delimiter=",",quotechar='"')
             resultsWriter.writerow([datetime.now().strftime("%H:%M:%S"), self.name])

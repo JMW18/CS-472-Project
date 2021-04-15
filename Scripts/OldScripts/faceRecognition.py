@@ -8,7 +8,7 @@ recognizer.read('../Trainer/trainer.yml')
 
 #Get the cascade
 faceCascade = cv2.CascadeClassifier('../Cascades/haarcascade_frontalface_default.xml')
-faceCascade1 = cv2.CascadeClassifier('../Cascades/haarcascade_profileface.xml')
+profileCascade = cv2.CascadeClassifier('../Cascades/haarcascade_profileface.xml')
 
 #Assign the font when printing the user id to the screen
 font = cv2.FONT_HERSHEY_PLAIN
