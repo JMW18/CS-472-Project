@@ -86,7 +86,6 @@ class FaceRecognizer:
             elif (len(front_faces) > 0 and len(side_faces) > 0):
                 print("Both front and side faces recognized")
                 self.determineIndividual(frame, front_faces, data)
-            elif ()
             else:
                 print("No faces recognized")
             
