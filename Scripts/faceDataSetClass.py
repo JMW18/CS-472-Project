@@ -9,6 +9,10 @@ class FaceDataset:
         # Get the cascade
         self.faceCascade = cv2.CascadeClassifier(
             '../Cascades/haarcascade_frontalface_default.xml')
+
+        #Get the mask cascade
+        self.maskCascade = cv2.CascadeClassifier(
+            '../Cascades/mask_cascade.xml')
        
         # Get the Video from the Camera
         self.videoCapture = cv2.VideoCapture(0)
@@ -42,17 +46,20 @@ class FaceDataset:
                 minNeighbors=5,
                 minSize=(20, 20)
             )
+
+            #Get the faces with masks
+            mask_faces = self.maskCascade.detectMultiScale(
+                gray,
+                scaleFactor=1.2,
+                minNeighbors=5,
+                minSize=(int(minW), int(minH))
+            )
             
-            # Mark the faces using a blue rectangle
-            for (x, y, w, h) in faces:
-                
-                # Mark the identified face with a blue rectangle
-                cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
-                self.count += 1
-                
-                # Save the image of the face to the 'Images' folder
-                cv2.imwrite("../Images/User." + str(self.user_id) + '.' +
-                            str(self.username) + '.' + str(self.count) + '.jpg', gray[y:y+h, x:x+w])
+            # Take the pictures
+            if (len(faces) > 0):
+                self.getImages(faces)
+            else:
+                self.getImages(mask_faces)
             
             # Set the title of the window opened with the frame
             cv2.imshow('Collecting Data', frame)
@@ -88,6 +95,21 @@ class FaceDataset:
         self.videoCapture.release()
         # Destroy all the windows created
         cv2.destroyAllWindows()
+        
+
+
+    def getImages(self, faces):
+        
+        for (x, y, w, h) in faces:
+                
+                # Mark the identified face with a blue rectangle
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                self.count += 1
+                
+                # Save the image of the face to the 'Images' folder
+                cv2.imwrite("../Images/User." + str(self.user_id) + '.' +
+                            str(self.username) + '.' + str(self.count) + '.jpg', gray[y:y+h, x:x+w])
+            
 
 def main():
     faceDataset = FaceDataset("test", 0)
