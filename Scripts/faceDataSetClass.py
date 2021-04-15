@@ -52,7 +52,7 @@ class FaceDataset:
                 gray,
                 scaleFactor=1.2,
                 minNeighbors=5,
-                minSize=(int(minW), int(minH))
+                minSize=(20, 20)
             )
             
             # Take the pictures
@@ -99,7 +99,6 @@ class FaceDataset:
 
 
     def getImages(self, faces):
-        
         for (x, y, w, h) in faces:
                 
                 # Mark the identified face with a blue rectangle
