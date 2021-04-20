@@ -9,8 +9,8 @@ class FaceTrainer:
         # Path to the images stored
         self.path = '../Images'
         
-        # Create the recognizer for the images
-        # Local Binary Patterns Histograms is used
+        # Create the recognizer for the images that utilizes Local Binary Patterns Histograms Algorithm.
+        # See a better description in the faceRecognitionClass.py file
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
         
         # Assign the cascade classifier to be used for face detection
@@ -29,10 +29,11 @@ class FaceTrainer:
         
         # For every image in 'Images' folder
         for imagePath in imagePaths:
-            # Convert image to black and white
+            # Convert image to black and white using the python imaging library
             PIL_img = Image.open(imagePath).convert('L')
             
-            # create a numpy array of black and white values in the image
+            # Create a numpy array of black and white values in the image
+            # Returns a 2D array 
             img_numpy = np.array(PIL_img, 'uint8')
             
             # Get the id from the saved name of the image
@@ -40,8 +41,11 @@ class FaceTrainer:
             
             # Returns the faces in the 'Images' folder as a list of rectanges
             faces = self.detector.detectMultiScale(img_numpy)
-            
 
+            # Set the title of the window opened with the frame
+            cv2.imshow('Training', cv2.imread(imagePath))
+            
+            # For each face in the faces array
             for (x,y,w,h) in faces:
                 faceSamples.append(img_numpy[y:y+h,x:x+w])
                 ids.append(id)
