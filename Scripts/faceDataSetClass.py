@@ -7,19 +7,9 @@ import io
 class FaceDataset:
     def __init__(self, username, user_id):
         
-        # A Haar Cascade Classifier identifies an object in an image or video through machine learning. 
-        # In order to create a Haar Cascade Classifier, there must be numerous positive (images that contain
-        # the object to be detected) and negative (images that do not contain the object to be detected) images.
-        # From these images, Haar features are extracted. These features are a single value that is formed by
-        # subtracting the number of pixels under a white rectangle by the number of pixels under a black rextangle.
-        # This calculation can be tedious and very time consuming. In order to decrease this time, integral images
-        # are used which make it easier to calculate this difference between white and black pixels by only using 
-        # four pixels. In order to ignore irrelevant features, the Adaboost algorithm is used. The Adaboost algorithm
-        # combines weak classifiers into a strong classifier. 
-        # Source: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html
-        # Source: https://computersciencesource.wordpress.com/2010/09/03/computer-vision-the-integral-image/
-        # Source: https://towardsdatascience.com/understanding-adaboost-2f94f22d5bfe#:~:text=Adaboost%20helps%20you%20combine%20multiple,a%20single%20%E2%80%9Cstrong%20classifier%E2%80%9D.&text=%E2%86%92%20The%20weak%20learners%20in,on%20those%20already%20handled%20well.
-        
+        # See faceRecognitionClass.py for a better explanantion of the three cascade used below and
+        # how they are created.
+
         # Get the frontal face cascade
         self.faceCascade = cv2.CascadeClassifier(
             '../Cascades/haarcascade_frontalface_default.xml')
@@ -27,6 +17,10 @@ class FaceDataset:
         # Get the mask cascade
         self.maskCascade = cv2.CascadeClassifier(
             '../Cascades/mask_cascade.xml')
+
+        # Get the profile face cascade
+        self.profileCascade = cv2.CascadeClassifier(
+            '../Cascades/haarcascade_profileface.xml')
        
         # Get the video stream from the web camera
         self.videoCapture = cv2.VideoCapture(0)
@@ -52,6 +46,9 @@ class FaceDataset:
             ret, frame = self.videoCapture.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             
+            # See faceRecognitionClass.py for an explanantion on each of the parameters in the
+            # detectMultiScale() method used below
+            
             # Get the faces in the frame
             faces = self.faceCascade.detectMultiScale(
                 gray,
@@ -67,12 +64,24 @@ class FaceDataset:
                 minNeighbors=5,
                 minSize=(20, 20)
             )
+
+            #Get profile faces
+            profileFace = self.profileCascade.detectMultiScale(
+                gray,
+                scaleFactor=1.3,
+                minNeighbors=5,
+                minSize=(20,20)
+            )
             
-            # Take the pictures
-            if (len(faces) > 0):
+            # Take the pictures of frontal face or profile face whichever is detected
+            if (len(faces) > 0 and len(profileFace) == 0):
+                self.getImages(faces, frame, gray)
+            elif(len(faces) == 0 and len(profileFace) > 0):
+                self.getImages(profileFace, frame, gray)
+            elif(len(faces) > 0 and len(profileFace) > 0): #Prioritize frontal face is there is a 'dispute'
                 self.getImages(faces, frame, gray)
             else:
-                self.getImages(mask_faces, frame, gray)
+                print("No faces detected, try repositioning...")
             
             # Set the title of the window opened with the frame
             cv2.imshow('Collecting Data', frame)

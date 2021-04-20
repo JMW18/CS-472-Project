@@ -125,10 +125,10 @@ class FaceRecognizer:
             
             # Determine the identification of the individual based on the faces identified by each of the
             # face cascades. 
-            if (len(mask_faces) > 0):
-                print("Mask detected")
-                self.determineIndividual(frame, mask_faces, data)
-            elif(len(front_faces) > 0 and len(side_faces) == 0):
+            #if (len(mask_faces) > 0):
+            #   print("Mask detected")
+            #   self.determineIndividual(frame, mask_faces, data)
+            if(len(front_faces) > 0 and len(side_faces) == 0):
                 print("Front face recognized")
                 self.determineIndividual(frame, front_faces, data)
             elif (len(front_faces) == 0 and len(side_faces) > 0):

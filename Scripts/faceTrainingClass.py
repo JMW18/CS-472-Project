@@ -14,7 +14,9 @@ class FaceTrainer:
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
         
         # Assign the cascade classifier to be used for face detection
-        self.detector = cv2.CascadeClassifier("../Cascades/haarcascade_frontalface_default.xml")
+        self.frontalFaceDetector = cv2.CascadeClassifier("../Cascades/haarcascade_frontalface_default.xml")
+
+        self.profileFaceDetector = cv2.CascadeClassifier('../Cascades/haarcascade_profileface.xml')
 
     # Get the images saved in the 'Images' folder
     def getImagesAndLabels(self, path):
@@ -39,8 +41,11 @@ class FaceTrainer:
             # Get the id from the saved name of the image
             id = int(os.path.split(imagePath)[-1].split(".")[1])
             
-            # Returns the faces in the 'Images' folder as a list of rectanges
-            faces = self.detector.detectMultiScale(img_numpy)
+            # Returns the frontal faces in the 'Images' folder as a list of rectanges
+            faces = self.frontalFaceDetector.detectMultiScale(img_numpy)
+
+            if(len(faces) == 0):
+                faces = self.profileFaceDetector.detectMultiScale(img_numpy)
 
             # Set the title of the window opened with the frame
             cv2.imshow('Training', cv2.imread(imagePath))
