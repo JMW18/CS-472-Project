@@ -138,6 +138,7 @@ class FaceRecognizer:
                 print("Both front and side faces recognized")
                 self.determineIndividual(frame, front_faces, data)
             else:
+                self.name = "No Face Recognized"
                 print("No faces recognized")
             
             # Output the results to the csv file

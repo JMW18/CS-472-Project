@@ -4,6 +4,12 @@ Images/*
 #Except for the placeholder text file
 !Images/Insert_Images_Here.txt
 
+#Ignore files in the Image Folder
+Results/*
+
+#Except for the placeholder text file
+!Results/Results_Here.txt
+
 #Ignore files in the Users Folder
 Users/*
 
