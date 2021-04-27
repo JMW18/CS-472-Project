@@ -1,3 +1,11 @@
+""" 
+Logan Bland
+Jalen Wayt
+CS 472 Project
+This file opens up the camera, detects the faces in each frame, and identifies the face
+Foundation of code from: https://towardsdatascience.com/real-time-face-recognition-an-end-to-end-project-b738bb0f7348 
+"""
+
 import numpy as np
 import cv2
 import os
@@ -109,6 +117,7 @@ class FaceRecognizer:
             )
 
             # Get the faces wearing a mask in the frame
+            # Does not work
             mask_faces = self.maskCascade.detectMultiScale(
                 gray,
                 scaleFactor=1.2,
@@ -124,7 +133,8 @@ class FaceRecognizer:
                 data = None
             
             # Determine the identification of the individual based on the faces identified by each of the
-            # face cascades. 
+            # face cascades.
+            # Does not work therefore commented out 
             #if (len(mask_faces) > 0):
             #   print("Mask detected")
             #   self.determineIndividual(frame, mask_faces, data)

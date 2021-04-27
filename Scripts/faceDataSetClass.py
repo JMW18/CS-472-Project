@@ -1,20 +1,40 @@
+""" 
+Logan Bland
+Jalen Wayt
+CS 472 Project
+This file opens up the camera, detects the faces in each frame, and takes 75 photos of the face and stores them in "Images"
+Foundation of code from: https://towardsdatascience.com/real-time-face-recognition-an-end-to-end-project-b738bb0f7348 
+"""
+
 import os
 import cv2
 import json
 import io
 
-
 class FaceDataset:
     def __init__(self, username, user_id):
         
-        # See faceRecognitionClass.py for a better explanantion of the three cascade used below and
-        # how they are created.
+        # A Haar Cascade Classifier identifies an object in an image or video through machine learning. 
+        # In order to create a Haar Cascade Classifier, there must be numerous positive (images that contain
+        # the object to be detected) and negative (images that do not contain the object to be detected) images.
+        # From these images, Haar features are extracted. These features are a single value that is formed by
+        # subtracting the number of pixels under a white rectangle by the number of pixels under a black rextangle.
+        # This calculation can be tedious and very time consuming. In order to decrease this time, integral images
+        # are used which make it easier to calculate this difference between white and black pixels by only using 
+        # four pixels. In order to ignore irrelevant features, the Adaboost algorithm is used. The Adaboost algorithm
+        # combines weak classifiers into a strong classifier. Below we create three different Haar Cascade Classifiers,
+        # one for recognizing a frontal face, one for recognizing a profile face, and lastly one for detecting
+        # a face with a mask on
+        # Source: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html
+        # Source: https://computersciencesource.wordpress.com/2010/09/03/computer-vision-the-integral-image/
+        # Source: https://towardsdatascience.com/understanding-adaboost-2f94f22d5bfe#:~:text=Adaboost%20helps%20you%20combine%20multiple,a%20single%20%E2%80%9Cstrong%20classifier%E2%80%9D.&text=%E2%86%92%20The%20weak%20learners%20in,on%20those%20already%20handled%20well.
 
         # Get the frontal face cascade
         self.faceCascade = cv2.CascadeClassifier(
             '../Cascades/haarcascade_frontalface_default.xml')
 
         # Get the mask cascade
+        # Does not work
         self.maskCascade = cv2.CascadeClassifier(
             '../Cascades/mask_cascade.xml')
 
@@ -46,8 +66,17 @@ class FaceDataset:
             ret, frame = self.videoCapture.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             
-            # See faceRecognitionClass.py for an explanantion on each of the parameters in the
-            # detectMultiScale() method used below
+            # For each face cascade below here is a description of the parameters passed
+            # Parameters:
+            #           1. gray: The image being passed
+            #           2. scaleFactor: How much the image is reduced; ours is 20%.
+            #              The greater the scale the faster ther algorithm works, but
+            #              has more chance of missing some faces
+            #           3. minNeighboprs: How many neighbors each candidate rectangle 
+            #              should have. The higher the value, the higher the quality
+            #              but fewer faces can be detetcted
+            #           4. minSize: Minimum possible size for a face to be detected
+            # Source: https://stackoverflow.com/questions/36218385/parameters-of-detectmultiscale-in-opencv-using-python
             
             # Get the faces in the frame
             faces = self.faceCascade.detectMultiScale(
@@ -58,6 +87,7 @@ class FaceDataset:
             )
 
             # Get the faces with masks
+            # Does not work 
             mask_faces = self.maskCascade.detectMultiScale(
                 gray,
                 scaleFactor=1.2,
@@ -78,7 +108,7 @@ class FaceDataset:
                 self.getImages(faces, frame, gray)
             elif(len(faces) == 0 and len(profileFace) > 0):
                 self.getImages(profileFace, frame, gray)
-            elif(len(faces) > 0 and len(profileFace) > 0): #Prioritize frontal face is there is a 'dispute'
+            elif(len(faces) > 0 and len(profileFace) > 0): # Prioritize frontal face is there is a 'dispute'
                 self.getImages(faces, frame, gray)
             else:
                 print("No faces detected, try repositioning...")
@@ -93,7 +123,7 @@ class FaceDataset:
             if k == 27:
                 break
             # Take one-hundred photos of the individual
-            elif self.count >= 100:
+            elif self.count >= 75:
                 break
 
         # Let user know the picture(s) have been taken
@@ -134,7 +164,7 @@ class FaceDataset:
             cv2.imwrite("../Images/User." + str(self.user_id) + '.' +
                 str(self.username) + '.' + str(self.count) + '.jpg', gray[y:y+h, x:x+w])
             
-
+            
 def main():
     faceDataset = FaceDataset("test", 0)
     faceDataset.collectData()

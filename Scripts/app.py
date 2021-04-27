@@ -1,3 +1,10 @@
+""" 
+Logan Bland
+Jalen Wayt
+CS 472 Project
+This runs the GUI application
+"""
+
 import tkinter
 from tkinter import *
 import cv2
