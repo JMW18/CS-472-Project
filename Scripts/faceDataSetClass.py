@@ -95,7 +95,7 @@ class FaceDataset:
                 minSize=(20, 20)
             )
 
-            #Get profile faces
+            # Get profile faces
             profileFace = self.profileCascade.detectMultiScale(
                 gray,
                 scaleFactor=1.3,
@@ -122,7 +122,7 @@ class FaceDataset:
             # Destroys window when ESC key is hit
             if k == 27:
                 break
-            # Take one-hundred photos of the individual
+            # Take seventy-five photos of the individual
             elif self.count >= 75:
                 break
 
@@ -137,7 +137,7 @@ class FaceDataset:
         # Destroy all the windows created
         cv2.destroyAllWindows()
 
-    # Method used to save the uses's ID and name to a json file
+    # Method used to save the uses's ID and name to a json file in "Users" directory
     def saveUserID(self):
         # If the User.json is already created, append the new user to it
         if os.path.isfile("../Users/Users.json") and os.access("../Users/Users.json", os.R_OK):

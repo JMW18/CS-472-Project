@@ -5,6 +5,7 @@ CS 472 Project
 This runs the GUI application
 """
 
+# Import libraries
 import tkinter
 from tkinter import *
 import cv2
@@ -13,6 +14,8 @@ import PIL.ImageTk
 import time
 import numpy as np
 import os
+
+# Import the classes 
 import faceRecognitionClass
 import faceDataSetClass
 import faceTrainingClass
@@ -23,7 +26,7 @@ class App:
         # Creates a trainer object
         self.trainer = faceTrainingClass.FaceTrainer()
         # Creates a recognizer object
-        self.recognizer = faceRecognitionClass.FaceRecognizer()
+        # self.recognizer = faceRecognitionClass.FaceRecognizer()
 
         # Get the ids used in the Images folder
         self.ids = self.trainer.getImagesAndLabels('../Images')[1]
@@ -45,10 +48,8 @@ class App:
         self.right_frame =  Frame(self.window, bg= "white")
         self.right_frame.pack(side = RIGHT)
 
-        # Creates a trainer object
-        self.trainer = faceTrainingClass.FaceTrainer()
         # Creates a recognizer object
-        self.recognizer = faceRecognitionClass.FaceRecognizer()
+        # self.recognizer = faceRecognitionClass.FaceRecognizer()
 
         # Add the logo
         self.image_label = tkinter.Label(self.left_frame, image = logo_img)
@@ -84,7 +85,7 @@ class App:
         self.trainer_button.grid(row=2, column = 1, padx = 20, pady = 20)
         
         # Creates a recognizer button to be executed
-        self.recognize_button = tkinter.Button(self.right_frame, text = "Recognize", command = lambda: self.recognizer.recognize())
+        self.recognize_button = tkinter.Button(self.right_frame, text = "Recognize", command = lambda: self.disableRecognition())
         self.recognize_button.grid(row=3, column = 1, padx = 20, pady = 20)
         
         # Run the GUI
@@ -109,6 +110,18 @@ class App:
         # Delete the data collector object
         # del self.data_collector
 
-
+    # Used to determine if a trainer has been built.
+    # If the trainer has not been built, prompt the user to do so
+    # Else, run the recognize application
+    def disableRecognition(self):
+        # Creates a recognizer button to be executed
+        if not os.path.isfile("../Trainer/trainer.yml"):
+            print("Please train data to create a trainer by pressing the 'Train Data' button...")
+        else:
+            # Creates a recognizer object
+            self.recognizer = faceRecognitionClass.FaceRecognizer()
+            # Run the recognizer
+            self.recognizer.recognize()
+            
 
 App(tkinter.Tk(), "CS 472 Project")

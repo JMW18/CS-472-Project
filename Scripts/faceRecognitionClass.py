@@ -10,8 +10,8 @@ import numpy as np
 import cv2
 import os
 import json
-import threading
-import time
+# import threading
+# import time
 import csv
 from datetime import datetime
 
