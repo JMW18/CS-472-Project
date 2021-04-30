@@ -190,6 +190,7 @@ class FaceRecognizer:
             # The less confidence, the more likely it is that inidivdual
             if(confidence < 100):
                 # Set the name if the data is not empty
+                # Else set the name to unknown
                 if data is not None:
                     self.name = data[str(self.name)]
                     cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
@@ -202,6 +203,7 @@ class FaceRecognizer:
                 confidence = " {0}%".format(round(100 - confidence))
                 cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 0, 255), 2)
 
+            # Display the name and confidence level
             cv2.putText(frame, str(self.name), (x+5, y-5), self.font, 1, (255, 255, 255), 2)
             cv2.putText(frame, str(confidence), (x+5, y+h-5), self.font, 1, (255, 255, 0), 1)
                     
