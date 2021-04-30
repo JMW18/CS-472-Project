@@ -13,18 +13,18 @@ For your convenience, a batch file is included to install the packages onto your
 
 # Instructions
 
-To run the application, you perform the following steps:
-&nbsp;&nbsp;&nbsp;1) Delete the "Delete_This_File.txt" file located in the Images folder
-&nbsp;&nbsp;&nbsp;2) Navigate to the Scripts folder
-&nbsp;&nbsp;&nbsp;3) Open a terminal or command prompt
-&nbsp;&nbsp;&nbsp;4) Run "python app.py" or "py app.py" depending on how you normally run python scripts
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- If a camera is not connected, the program will not run properly.
-&nbsp;&nbsp;&nbsp;5) A Graphical User Interface named "CS-472-Project" will appear with a text box and
-&nbsp;&nbsp;&nbsp;6) Type your name in the textbox
-&nbsp;&nbsp;&nbsp;7) Click the "Update Dataset" button
-&nbsp;&nbsp;&nbsp;8) Click the "Train Data" button
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - The program will prompt you to train the data before running the recognizer
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - The application is trained when the command prompt or terminal displays "x faces were trained. Exiting program." (where x is the number of individuals)
-&nbsp;&nbsp;&nbsp;9) Click the "Recognize" button
-&nbsp;&nbsp;&nbsp;10) Enjoy the application
-&nbsp;&nbsp;&nbsp;11) To exit the application, press the "X" button on the Graphical User Interface or hit the "Esc" key on your keyboard
+To run the application, you perform the following steps:<br />
+&nbsp;&nbsp;&nbsp;1) Delete the "Delete_This_File.txt" file located in the Images folder<br />
+&nbsp;&nbsp;&nbsp;2) Navigate to the Scripts folder<br />
+&nbsp;&nbsp;&nbsp;3) Open a terminal or command prompt<br />
+&nbsp;&nbsp;&nbsp;4) Run "python app.py" or "py app.py" depending on how you normally run python scripts<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- If a camera is not connected, the program will not run properly.<br />
+&nbsp;&nbsp;&nbsp;5) A Graphical User Interface named "CS-472-Project" will appear with a text box and<br />
+&nbsp;&nbsp;&nbsp;6) Type your name in the textbox<br />
+&nbsp;&nbsp;&nbsp;7) Click the "Update Dataset" button<br />
+&nbsp;&nbsp;&nbsp;8) Click the "Train Data" button<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - The program will prompt you to train the data before running the recognizer<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - The application is trained when the command prompt or terminal displays "x faces were trained. Exiting program." (where x is the number of individuals)<br />
+&nbsp;&nbsp;&nbsp;9) Click the "Recognize" button<br />
+&nbsp;&nbsp;&nbsp;10) Enjoy the application<br />
+&nbsp;&nbsp;&nbsp;11) To exit the application, press the "X" button on the Graphical User Interface or hit the "Esc" key on your keyboard<br />
