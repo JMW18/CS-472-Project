@@ -2,7 +2,7 @@
 Images/*
 
 #Except for the placeholder text file
-!Images/Insert_Images_Here.txt
+!Images/Delete_This_File.txt
 
 #Ignore files in the Image Folder
 Results/*
@@ -18,3 +18,9 @@ Users/*
 
 #Ignore the .vscode folder
 .vscode/
+
+#Ignore the trainer file
+Trainer/*
+
+#Except for the placeholder text file
+!Trainer/Trainer_Here.txt
