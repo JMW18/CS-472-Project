@@ -1,5 +1,7 @@
 # Introduction
 
+Foundation for our Project: https://github.com/Mjrovai/OpenCV-Face-Recognition
+
 All tests were ran using Python 3.9. Consider updating or downgrading your version of Python if you are unable to run the application properly.
 
 Python Packages:<br />
